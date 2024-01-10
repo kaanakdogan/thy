@@ -38,5 +38,5 @@ export async function getFlights(arrivalName: string, departureName: string) {
         departureName.toLocaleLowerCase()
   );
 
-  return { filteredFlights, flights };
+  return { filteredFlights };
 }
