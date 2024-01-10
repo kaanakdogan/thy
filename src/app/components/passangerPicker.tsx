@@ -38,8 +38,8 @@ export function PassangerPicker({
         close={() => setIsOpen(false)}
       >
         <div className='m-3'>
-          <p>Kabin ve yolcu seçimi</p>
-          <div className='flex flex-wrap justify-between pt-3'>
+          <p className='text-gray-600'>Kabin ve yolcu seçimi</p>
+          <div className='flex flex-wrap justify-between pt-3 text-sm text-gray-600'>
             <div className='pr-2'>
               <input
                 type='radio'
@@ -48,7 +48,9 @@ export function PassangerPicker({
                 checked={checkedCabin === 'ECONOMY'}
                 onChange={() => setCheckedCabin('ECONOMY')}
               />
-              <label htmlFor='ECONOMY'>Economy Class</label>
+              <label htmlFor='ECONOMY' className='pl-1'>
+                Economy Class
+              </label>
             </div>
             <div>
               <input
@@ -58,12 +60,16 @@ export function PassangerPicker({
                 checked={checkedCabin === 'BUSINESS'}
                 onChange={() => setCheckedCabin('BUSINESS')}
               />
-              <label htmlFor='BUSINESS'>Business Class</label>
+              <label htmlFor='BUSINESS' className='pl-1'>
+                Business Class
+              </label>
             </div>
           </div>
-          <div className='flex flex-wrap justify-between pt-3'>
-            <p>Yolcu</p>
-            <div className='flex justify-center text-center'>
+          <div className='flex flex-wrap justify-between pt-3 text-center'>
+            <p>
+              <b>Yolcu</b>
+            </p>
+            <div className='flex justify-center'>
               <button
                 className='rounded bg-gray-300 p-1 px-3 text-gray-600'
                 disabled={passangerCount === 1}

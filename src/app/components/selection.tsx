@@ -18,8 +18,10 @@ export function Selection() {
     console.log('departure', departure);
   }, [arrival, departure]);
 
+  const onSubmit = () => {};
+
   return (
-    <div className='bg-selectionbg flex flex-wrap justify-center p-5'>
+    <div className='bg-selectionbg align-center flex flex-wrap justify-center p-5'>
       <LocationInput
         isArrival={false}
         value={departure}
@@ -33,6 +35,9 @@ export function Selection() {
         passangerCount={passangerCount}
         setPassangerCount={setPassangerCount}
       />
+      <button className='m-1 w-5 bg-[#E81932] text-white' onClick={onSubmit}>
+        {'>'}
+      </button>
     </div>
   );
 }
