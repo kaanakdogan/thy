@@ -18,7 +18,7 @@ export type SubCategoryType = {
     currency: string;
   };
   order: number;
-  status: string;
+  status: 'AVAILABLE' | 'ERROR';
   rights: string[];
 };
 

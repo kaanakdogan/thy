@@ -26,6 +26,7 @@ export function LocationInput({
         className='w-20 p-1'
         onChange={(e) => onChange(e.target.value)}
         value={value}
+        placeholder={isArrival ? 'Nereye' : 'Nereden'}
       />
     </div>
   );

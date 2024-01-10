@@ -1,5 +1,6 @@
 import { CategoryType, SubCategoryType } from './flight.types';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 export function CategoryTab({
   category,
@@ -59,9 +60,11 @@ export function CategoryTab({
 export function CategoryContent({
   data,
   isPromoActivated,
+  count,
 }: {
   data: CategoryType;
   isPromoActivated: boolean;
+  count: number;
 }) {
   return (
     <div className='m-3 flex  flex-col bg-white md:translate-y-[-6px] md:flex-row md:p-3 '>
@@ -70,6 +73,7 @@ export function CategoryContent({
           key={index}
           subCategory={item}
           isPromoActivated={isPromoActivated}
+          count={count}
         />
       ))}
     </div>
@@ -90,10 +94,14 @@ function getLabelByBrandCode(code: 'ecoFly' | 'extraFly' | 'primeFly') {
 function CategoryCard({
   subCategory,
   isPromoActivated,
+  count,
 }: {
   subCategory: SubCategoryType;
   isPromoActivated: boolean;
+  count: number;
 }) {
+  const router = useRouter();
+
   const isDisabled = isPromoActivated && subCategory.brandCode !== 'ecoFly';
   const isPriceHalved = isPromoActivated && subCategory.brandCode === 'ecoFly';
   return (
@@ -128,6 +136,20 @@ function CategoryCard({
           isDisabled ? 'bg-gray-200 text-gray-400' : 'bg-[#E81932] text-white'
         } h-10`}
         disabled={isDisabled}
+        onClick={() => {
+          if (subCategory.status === 'AVAILABLE') {
+            const price =
+              (isPriceHalved
+                ? subCategory.price.amount / 2
+                : subCategory.price.amount) * count;
+            router.push(
+              `/SUCCESS?currency=${subCategory.price.currency}&amount=${price}`
+            );
+            return;
+          }
+
+          router.push('/ERROR');
+        }}
       >
         <b>Uçuşu Seç</b>
       </button>

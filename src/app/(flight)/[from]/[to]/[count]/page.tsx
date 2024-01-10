@@ -20,7 +20,7 @@ export default async function Page({
       <div className='self-start pt-1 text-xl'>
         {departureCity} - {arrivalCity}, {count} Yolcu
       </div>
-      <FlightList data={data} />
+      <FlightList data={data} count={count} />
     </main>
   );
 }

@@ -46,7 +46,13 @@ function sortByPrice(a: FlightType, b: FlightType) {
   return 1;
 }
 
-export function FlightList({ data }: { data: FlightType[] }) {
+export function FlightList({
+  data,
+  count,
+}: {
+  data: FlightType[];
+  count: number;
+}) {
   const [isToggleEnabled, setIsToggleValue] = useState<boolean>(false);
   const [sortType, setSortType] = useState<'time' | 'price'>('time');
 
@@ -98,6 +104,7 @@ export function FlightList({ data }: { data: FlightType[] }) {
                 key={index}
                 item={item}
                 isPromoActivated={isToggleEnabled}
+                count={count}
               />
             ))}
         </div>

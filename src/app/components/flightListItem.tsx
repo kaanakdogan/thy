@@ -7,9 +7,11 @@ type Category = 'ECONOMY' | 'BUSINESS' | null;
 export function FlightListItem({
   item,
   isPromoActivated,
+  count,
 }: {
   item: FlightType;
   isPromoActivated: boolean;
+  count: number;
 }) {
   const [expandedCategory, setExpandedCategory] = useState<Category>(null);
 
@@ -75,6 +77,7 @@ export function FlightListItem({
         <CategoryContent
           data={item.fareCategories[expandedCategory]}
           isPromoActivated={isPromoActivated}
+          count={count}
         />
       ) : null}
     </>
