@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { LocationInput } from './locationInput';
 import { Date } from './date';
 import { PassangerPicker } from './passangerPicker';
+import { getFlights } from '../actions';
 
 export function Selection() {
   const [arrival, setArrival] = useState<string>('');
@@ -18,7 +19,11 @@ export function Selection() {
     console.log('departure', departure);
   }, [arrival, departure]);
 
-  const onSubmit = () => {};
+  const onSubmit = () => {
+    getFlights(arrival, departure)
+      .then((a) => console.log(a))
+      .catch((e) => console.log(e));
+  };
 
   return (
     <div className='bg-selectionbg align-center flex flex-wrap justify-center p-5'>
