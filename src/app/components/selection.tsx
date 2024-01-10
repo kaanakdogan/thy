@@ -19,13 +19,38 @@ export function Selection() {
   const [error, setError] = useState<string>('');
   const router = useRouter();
 
+  useEffect(() => {
+    const _arrival = localStorage.getItem('arrival');
+    if (_arrival) {
+      setArrival(_arrival);
+    }
+
+    const _departure = localStorage.getItem('departure');
+    if (_departure) {
+      setDeparture(_departure);
+    }
+    const _passangerCount = localStorage.getItem('passangerCount');
+    if (_passangerCount) {
+      setPassangerCount(parseInt(_passangerCount));
+    }
+
+    const _checkedCabin = localStorage.getItem('checkedCabin');
+    if (_checkedCabin) {
+      setCheckedCabin(_checkedCabin as 'ECONOMY' | 'BUSINESS');
+    }
+  }, []);
+
   const onSubmit = () => {
     getFlightsUrl(arrival, departure)
-      .then((res) =>
+      .then((res) => {
+        localStorage.setItem('arrival', arrival);
+        localStorage.setItem('departure', departure);
+        localStorage.setItem('passangerCount', passangerCount.toString());
+        localStorage.setItem('checkedCabin', checkedCabin);
         router.push(
           `/${res.departureCode}/${res.arrivalCode}/${passangerCount}`
-        )
-      )
+        );
+      })
       .catch((e) => {
         setError(e.message);
         setIsModalOpen(true);
