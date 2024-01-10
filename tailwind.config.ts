@@ -11,6 +11,10 @@ const config: Config = {
       colors: {
         selectionbg: 'rgb(96 105 119 / 60%)',
       },
+      boxShadow: { list: '0 4px 8px 0 rgba(0,0,0,.05)' },
+      fontSize: {
+        xxs: ['0.5rem', '0.5rem'],
+      },
     },
   },
   plugins: [],

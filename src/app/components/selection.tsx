@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react';
 import { LocationInput } from './locationInput';
 import { Date } from './date';
 import { PassangerPicker } from './passangerPicker';
-import { getFlights } from '../actions';
+import { getFlightsUrl } from '../actions';
 import { Modal } from './modal';
+import { useRouter } from 'next/navigation';
 
 export function Selection() {
   const [arrival, setArrival] = useState<string>('');
@@ -16,6 +17,7 @@ export function Selection() {
   );
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
+  const router = useRouter();
 
   useEffect(() => {
     console.log('arrival', arrival);
@@ -23,8 +25,12 @@ export function Selection() {
   }, [arrival, departure]);
 
   const onSubmit = () => {
-    getFlights(arrival, departure)
-      .then((a) => console.log(a))
+    getFlightsUrl(arrival, departure)
+      .then((res) =>
+        router.push(
+          `/${res.departureCode}/${res.arrivalCode}/${passangerCount}`
+        )
+      )
       .catch((e) => {
         setError(e.message);
         setIsModalOpen(true);
