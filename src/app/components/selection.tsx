@@ -8,6 +8,10 @@ import { PassangerPicker } from './passangerPicker';
 export function Selection() {
   const [arrival, setArrival] = useState<string>('');
   const [departure, setDeparture] = useState<string>('');
+  const [passangerCount, setPassangerCount] = useState<number>(1);
+  const [checkedCabin, setCheckedCabin] = useState<'ECONOMY' | 'BUSINESS'>(
+    'ECONOMY'
+  );
 
   useEffect(() => {
     console.log('arrival', arrival);
@@ -15,7 +19,7 @@ export function Selection() {
   }, [arrival, departure]);
 
   return (
-    <div className='bg-selectionbg flex flex-wrap p-5'>
+    <div className='bg-selectionbg flex flex-wrap justify-center p-5'>
       <LocationInput
         isArrival={false}
         value={departure}
@@ -23,7 +27,12 @@ export function Selection() {
       />
       <LocationInput isArrival={true} value={arrival} onChange={setArrival} />
       <Date />
-      <PassangerPicker />
+      <PassangerPicker
+        checkedCabin={checkedCabin}
+        setCheckedCabin={setCheckedCabin}
+        passangerCount={passangerCount}
+        setPassangerCount={setPassangerCount}
+      />
     </div>
   );
 }

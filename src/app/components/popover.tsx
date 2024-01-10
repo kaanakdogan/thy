@@ -39,14 +39,17 @@ function PopoverContent({
 
     const clickListener = (e: MouseEvent) => {
       console.log(e);
-      if (e.target !== contentRef.current) {
+      if (
+        e.target !== contentRef.current &&
+        !contentRef.current?.contains(e.target as Node)
+      ) {
         close();
       }
     };
-    document.body.addEventListener('click', clickListener);
+    document.addEventListener('click', clickListener);
 
     return () => {
-      document.body.removeEventListener('click', clickListener);
+      document.removeEventListener('click', clickListener);
     };
   }, []);
 
