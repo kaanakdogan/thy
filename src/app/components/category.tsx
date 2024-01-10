@@ -6,15 +6,22 @@ export function CategoryTab({
   label,
   isExpanded,
   onClick,
+  isPriceHalved,
 }: {
   category: CategoryType;
   label: string;
   isExpanded: boolean;
   onClick: () => void;
+  isPriceHalved: boolean;
 }) {
   const ecoSubCategory = category.subcategories.find(
     (item) => item.brandCode === 'ecoFly'
   );
+
+  if (!ecoSubCategory) {
+    return null;
+  }
+
   return (
     <div
       className={`shadow-list text-xxs mt-3 flex grow-0 basis-1/4 items-center justify-start bg-white p-3 md:ml-3 md:mt-0 ${
@@ -30,7 +37,10 @@ export function CategoryTab({
         <span>Yolcu Başına</span>
         <span className='text-xs'>
           <b>
-            {ecoSubCategory?.price.currency} {ecoSubCategory?.price.amount}
+            {ecoSubCategory.price.currency}{' '}
+            {isPriceHalved
+              ? ecoSubCategory.price.amount / 2
+              : ecoSubCategory.price.amount}
           </b>
         </span>
       </div>
@@ -84,6 +94,8 @@ function CategoryCard({
   subCategory: SubCategoryType;
   isPromoActivated: boolean;
 }) {
+  const isDisabled = isPromoActivated && subCategory.brandCode !== 'ecoFly';
+  const isPriceHalved = isPromoActivated && subCategory.brandCode === 'ecoFly';
   return (
     <div className='m-1 flex basis-1/3 flex-col bg-white'>
       <div className='flex h-10 items-center justify-between bg-[#f9f9f9] p-2'>
@@ -93,7 +105,11 @@ function CategoryCard({
         <div className='flex'>
           <span className='text-xxs pt-1'>{subCategory.price.currency}</span>
           <span>
-            <b>{subCategory.price.amount}</b>
+            <b>
+              {isPriceHalved
+                ? subCategory.price.amount / 2
+                : subCategory.price.amount}
+            </b>
           </span>
         </div>
       </div>
@@ -101,7 +117,7 @@ function CategoryCard({
         {subCategory.rights.map((item, index) => (
           <div
             key={subCategory.brandCode + index}
-            className='border-b-2 border-solid border-[#EAEAEA]'
+            className='text-xxs border-b-2 border-solid border-[#EAEAEA] p-2'
           >
             {item}
           </div>
@@ -109,12 +125,11 @@ function CategoryCard({
       </div>
       <button
         className={`${
-          isPromoActivated && subCategory.brandCode !== 'ecoFly'
-            ? ''
-            : 'bg-[#E81932] text-white'
+          isDisabled ? 'bg-gray-200 text-gray-400' : 'bg-[#E81932] text-white'
         } h-10`}
+        disabled={isDisabled}
       >
-        Uçuş Seç
+        <b>Uçuşu Seç</b>
       </button>
     </div>
   );

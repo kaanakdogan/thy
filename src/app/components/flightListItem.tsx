@@ -61,12 +61,14 @@ export function FlightListItem({
           label={'ECONOMY'}
           isExpanded={expandedCategory === 'ECONOMY'}
           onClick={() => setCategory('ECONOMY')}
+          isPriceHalved={isPromoActivated}
         />
         <CategoryTab
           category={item.fareCategories.BUSINESS}
           label={'BUSINESS'}
           isExpanded={expandedCategory === 'BUSINESS'}
           onClick={() => setCategory('BUSINESS')}
+          isPriceHalved={false}
         />
       </div>
       {expandedCategory ? (
