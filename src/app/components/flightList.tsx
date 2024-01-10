@@ -6,17 +6,17 @@ import { FlightListItem } from './flightListItem';
 import { Toggle } from './toggle';
 
 export function FlightList({ data }: { data: FlightType[] }) {
-  const [toggleValue, setToggleValue] = useState<string>('');
+  const [toggleValue, setToggleValue] = useState<boolean>(false);
   return (
     <>
       <div className='self-start pt-3'>
         <Toggle
           label='Promosyon Kodu'
-          onChange={(e) => {
-            console.log('onChange', e.target.value);
-            setToggleValue(e.target.value);
+          onChange={(value) => {
+            console.log('onChange', value);
+            setToggleValue(value);
           }}
-          value={toggleValue}
+          enabled={toggleValue}
         />
       </div>
       <div className='shadow-list flex w-full flex-col rounded pt-5'>
@@ -31,7 +31,11 @@ export function FlightList({ data }: { data: FlightType[] }) {
         </div>
         <div className='rounded-b border-2 border-t-0 border-solid border-[#EAEAEA] bg-[#F9F9F9] p-3'>
           {data.map((item, index) => (
-            <FlightListItem key={index} item={item} />
+            <FlightListItem
+              key={index}
+              item={item}
+              isPromoActivated={toggleValue}
+            />
           ))}
         </div>
       </div>
