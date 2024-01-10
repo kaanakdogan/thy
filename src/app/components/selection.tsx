@@ -19,11 +19,6 @@ export function Selection() {
   const [error, setError] = useState<string>('');
   const router = useRouter();
 
-  useEffect(() => {
-    console.log('arrival', arrival);
-    console.log('departure', departure);
-  }, [arrival, departure]);
-
   const onSubmit = () => {
     getFlightsUrl(arrival, departure)
       .then((res) =>

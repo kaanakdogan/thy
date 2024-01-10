@@ -61,10 +61,7 @@ export function FlightList({
       <div className='self-start pt-3'>
         <Toggle
           label='Promosyon Kodu'
-          onChange={(value) => {
-            console.log('onChange', value);
-            setIsToggleValue(value);
-          }}
+          onChange={(value) => setIsToggleValue(value)}
           enabled={isToggleEnabled}
         />
       </div>

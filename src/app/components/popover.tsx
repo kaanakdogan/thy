@@ -38,7 +38,6 @@ function PopoverContent({
     }
 
     const clickListener = (e: MouseEvent) => {
-      console.log(e);
       if (
         e.target !== contentRef.current &&
         !contentRef.current?.contains(e.target as Node)
@@ -66,7 +65,6 @@ function PopoverContent({
 
 export function Popover({ isOpen, children, close, parentRef }: PopoverProps) {
   if (isOpen) {
-    console.log(parentRef.current);
     return createPortal(
       <PopoverContent close={close} parentRef={parentRef}>
         {children}
