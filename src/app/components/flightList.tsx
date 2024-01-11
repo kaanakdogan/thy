@@ -54,7 +54,7 @@ export function FlightList({
   count: number;
 }) {
   const [isToggleEnabled, setIsToggleValue] = useState<boolean>(false);
-  const [sortType, setSortType] = useState<'time' | 'price'>('time');
+  const [sortType, setSortType] = useState<'time' | 'price'>('price');
 
   return (
     <>
