@@ -61,10 +61,12 @@ export function CategoryContent({
   data,
   isPromoActivated,
   count,
+  activeFareCategory,
 }: {
   data: CategoryType;
   isPromoActivated: boolean;
   count: number;
+  activeFareCategory: 'ECONOMY' | 'BUSINESS';
 }) {
   return (
     <div className='m-3 flex  flex-col bg-white md:translate-y-[-6px] md:flex-row md:p-3 '>
@@ -74,6 +76,7 @@ export function CategoryContent({
           subCategory={item}
           isPromoActivated={isPromoActivated}
           count={count}
+          activeFareCategory={activeFareCategory}
         />
       ))}
     </div>
@@ -95,15 +98,22 @@ function CategoryCard({
   subCategory,
   isPromoActivated,
   count,
+  activeFareCategory,
 }: {
   subCategory: SubCategoryType;
   isPromoActivated: boolean;
   count: number;
+  activeFareCategory: 'ECONOMY' | 'BUSINESS';
 }) {
   const router = useRouter();
 
-  const isDisabled = isPromoActivated && subCategory.brandCode !== 'ecoFly';
-  const isPriceHalved = isPromoActivated && subCategory.brandCode === 'ecoFly';
+  const isDisabled =
+    isPromoActivated &&
+    (activeFareCategory !== 'ECONOMY' || subCategory.brandCode !== 'ecoFly');
+  const isPriceHalved =
+    isPromoActivated &&
+    activeFareCategory === 'ECONOMY' &&
+    subCategory.brandCode === 'ecoFly';
   return (
     <div className='m-1 flex basis-1/3 flex-col bg-white'>
       <div className='flex h-10 items-center justify-between bg-[#f9f9f9] p-2'>

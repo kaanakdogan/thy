@@ -78,6 +78,7 @@ export function FlightListItem({
           data={item.fareCategories[expandedCategory]}
           isPromoActivated={isPromoActivated}
           count={count}
+          activeFareCategory={expandedCategory}
         />
       ) : null}
     </>
