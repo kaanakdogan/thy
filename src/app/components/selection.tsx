@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { LocationInput } from './locationInput';
 import { Date } from './date';
 import { PassangerPicker } from './passangerPicker';
-import { getFlightsUrl } from '../actions';
+import { getFlightsUrl } from '@/app/actions';
 import { Modal } from './modal';
 import { useRouter } from 'next/navigation';
 
@@ -73,11 +73,19 @@ export function Selection() {
           passangerCount={passangerCount}
           setPassangerCount={setPassangerCount}
         />
-        <button className='m-1 w-5 bg-[#E81932] text-white' onClick={onSubmit}>
+        <button
+          data-testid={'selection-submit'}
+          className='m-1 w-5 bg-[#E81932] text-white'
+          onClick={onSubmit}
+        >
           {'>'}
         </button>
       </div>
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+      <Modal
+        testId='selection'
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      >
         {error}
       </Modal>
     </>
